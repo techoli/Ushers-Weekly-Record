@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pastor Dashboard</title>
+
+    <link rel="stylesheet" href="pastor.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="dashboard">
+      <!-- Top image -->
+      <img src="img/church_logo.png" alt="Church Logo" class="form-logo" />
+      <h2>Christ The Redeemer Ministries</h2>
+      <h3>Weekly Record</h3>
+
+      <div class="loader hidden" id="loader"></div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <canvas id="attendanceChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <canvas id="offeringChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Table -->
+    </div>
+    <div class="table-card">
+      <div class="export-actions">
+        <button onclick="exportPDF()">📄 Export PDF</button>
+        <button onclick="exportExcel()">📊 Export Excel</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Record Time</th>
+            <th>Sunday Date</th>
+            <th>Service Type</th>
+            <th>Service Number</th>
+            <th>Love Offering</th>
+            <th>Thanks Offering</th>
+            <th>OC Offering</th>
+            <th>Total Offering TZS</th>
+            <th>Minister Tithe</th>
+            <th>Cong Tithe</th>
+            <th>OC Tithe</th>
+            <th>Total Tithe(TZS)</th>
+            <th>Total Money(TZS)</th>
+            <th>Men</th>
+            <th>Women</th>
+            <th>Children</th>
+            <th>Total Attendance</th>
+            <th>New Converts</th>
+            <th>First Timers</th>
+          </tr>
+        </thead>
+        <tbody id="recordsTable"></tbody>
+      </table>
+    </div>
+
+    <script src="pastor.js"></script>
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- jsPDF AutoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- SheetJS (Excel) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  </body>
+</html>

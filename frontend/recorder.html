@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recorder View</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+  </head>
+  <body>
+    <div class="form-container">
+      <div id="successMessage" class="success hidden">
+        ✅ Record saved successfully
+      </div>
+
+      <!-- Top image -->
+      <img src="img/church_logo.png" alt="Church Logo" class="form-logo" />
+
+      <h2>Christ The Redeemer Ministries</h2>
+      <h3>Weekly Record</h3>
+
+      <div id="loader" class="loader hidden"></div>
+
+      <form id="recordForm">
+        <input type="text" id="sundayPicker" placeholder="Sunday Date" />
+        <select name="service_type" id="service_type">
+          <option value="" id="option1" disabled selected hidden>
+            Service Type
+          </option>
+
+          <option value="Prophetic Prayer Service">
+            Prophetic Prayer Service
+          </option>
+          <option value="Thanks giving Service">Thanks giving Service</option>
+          <option value="Family Sunday">Family Sunday</option>
+          <option value="Carol Sunday">Carol Sunday</option>
+          <option value="Mid-week">Mid-Week</option>
+          <option value="Special Activity Sunday">
+            Special Activity Sunday
+          </option>
+        </select>
+        <select name="service_number" id="service_number">
+          <option value="" id="option1" disabled selected hidden>
+            Service Number
+          </option>
+
+          <option value="First Service">First Service</option>
+          <option value="Second Service">Second Service</option>
+          <option value="Second Service">Joint Service</option>
+        </select>
+
+        <input
+          type="text"
+          placeholder="Love Offering"
+          id="l_offering"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Thanksgiving Offering"
+          id="t_offering"
+        />
+        <input type="text" placeholder="Project Offering" id="p_offering" />
+        <input
+          type="text"
+          placeholder="Other Currency Offering"
+          id="oc_offering"
+        />
+        <input
+          type="text"
+          placeholder="Total Offering"
+          id="total_offering"
+          readonly
+        />
+        <input
+          type="text"
+          placeholder="Minister Tithe"
+          id="min_tithe"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Congregation Tithe"
+          id="cong_tithe"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Other Currency Tithe"
+          id="oc_tithe"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Total Tithe"
+          id="total_tithe"
+          required
+          readonly
+        />
+        <input
+          type="text"
+          placeholder="Total Money"
+          id="total_money"
+          required
+          readonly
+        />
+
+        <input type="number" placeholder="Men Count" id="men" required />
+        <input type="number" placeholder="Women Count" id="women" required />
+        <input
+          type="number"
+          placeholder="Children Count"
+          id="children"
+          required
+        />
+
+        <input type="number" placeholder="Total Count" id="total" readonly />
+        <input type="number" placeholder="New Converts" id="new_convert" />
+        <input type="number" placeholder="First Timers" id="first_timers" />
+
+        <button type="submit">Save Record</button>
+      </form>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      flatpickr("#sundayPicker", {
+        dateFormat: "Y-m-d",
+        disable: [
+          function (date) {
+            // Allow only Sunday (0) and Wednesday (3)
+            return date.getDay() !== 0 && date.getDay() !== 3;
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>
