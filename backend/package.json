@@ -1,9 +1,0 @@
-{
-  "name": "church-records",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "mongodb": "^7.0.0",
-    "mongoose": "^7.0.0"
-  }
-}
