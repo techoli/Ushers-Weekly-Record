@@ -20,11 +20,13 @@ export default async function handler(req, res) {
 
     const user = await User.findOne({ username, password });
 
-    if (user) {
-      return res.status(200).json({ success: true, user });
+    if (!user) {
+      return res
+        .status(200)
+        .json({ success: false, message: "User not found" });
     }
 
-    return res.status(200).json({ success: false, message: "User not found" });
+    return res.status(200).json({ success: true, user });
   } catch (err) {
     console.error("Error in /api/usersexist:", err);
     return res.status(500).json({ success: false, message: "Server error" });
