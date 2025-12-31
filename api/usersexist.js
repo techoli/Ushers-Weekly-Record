@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   try {
     await connectToDatabase(
-      "mongodb+srv://ushers_admin:Obiagaeli47%40@ushers-cluster.nz4l1zf.mongodb.net/ushers_records"
+      "mongodb+srv://ushers_admin:Obiagaeli47@ushers-cluster.nz4l1zf.mongodb.net/ushers_records"
     );
 
     const { username, password } = req.body;
