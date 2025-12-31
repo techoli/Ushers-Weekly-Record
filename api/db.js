@@ -7,11 +7,12 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
-export default async function connectToDatabase() {
+export default async function connectToDatabase(uri) {
   if (cached.conn) return cached.conn;
 
-  const uri =
-    "mongodb+srv://ushers_admin:Obiagaeli47%40@ushers-cluster.nz4l1zf.mongodb.net/ushers_records";
+  if (!uri) {
+    throw new Error("MongoDB URI is missing");
+  }
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(uri).then((mongoose) => mongoose);
