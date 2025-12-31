@@ -1,8 +1,6 @@
+// api/usersexist.js
 import connectToDatabase from "./db.js";
 import User from "./models/User.js";
-
-const MONGO_URI =
-  "mongodb+srv://ushers_admin:Obiagaeli47%40@ushers-cluster.nz4l1zf.mongodb.net/ushers_records?retryWrites=true&w=majority";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -10,7 +8,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    await connectToDatabase(MONGO_URI);
+    await connectToDatabase();
 
     const { username, password } = req.body;
 
@@ -30,7 +28,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ success: true, user });
   } catch (err) {
-    console.error("API ERROR:", err);
+    console.error("Error in /api/usersexist:", err);
     return res.status(500).json({ success: false, message: "Server error" });
   }
 }
