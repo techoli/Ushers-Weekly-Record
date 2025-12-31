@@ -81,6 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* Date logic */
   sundayPicker.addEventListener("change", () => {
+    if (isLastSunday(sundayPicker.value)) {
+      service_type.value = "Last Sunday";
+    }
+
     p_offering.style.display = isLastSunday(sundayPicker.value)
       ? "block"
       : "none";
