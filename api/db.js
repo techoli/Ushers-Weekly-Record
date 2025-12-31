@@ -1,6 +1,12 @@
 // api/db.js
 import mongoose from "mongoose";
 
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI environment variable");
+}
+
 let cached = global.mongoose;
 
 if (!cached) {
@@ -11,11 +17,7 @@ export default async function connectToDatabase() {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    cached.promise = mongoose
-      .connect(
-        "mongodb+srv://ushers_admin:Obiagaeli47%40@ushers-cluster.nz4l1zf.mongodb.net/ushers_records?retryWrites=true&w=majority"
-      )
-      .then((mongoose) => mongoose);
+    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => mongoose);
   }
 
   cached.conn = await cached.promise;
