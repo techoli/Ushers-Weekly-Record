@@ -1,5 +1,5 @@
-import connectToDatabase from "../db";
-import User from "../models/User";
+import connectToDatabase from "../db.js";
+import User from "../models/User.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -7,12 +7,15 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("Connecting to database...");
     await connectToDatabase(process.env.MONGODB_URI);
-    console.log("Database connected");
 
     const { username, password } = req.body;
-    console.log("Body received:", req.body);
+
+    if (!username || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing username or password" });
+    }
 
     const user = await User.findOne({ username, password });
     if (user) {
