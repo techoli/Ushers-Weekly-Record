@@ -12,10 +12,13 @@ export default async function connectToDatabase(uri) {
 
   if (!cached.promise) {
     cached.promise = mongoose
-      .connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
+      .connect(
+        "mongodb+srv://ushers_admin:Obiagaeli47%40@ushers-cluster.nz4l1zf.mongodb.net/ushers_records",
+        {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        }
+      )
       .then((mongoose) => mongoose);
   }
   cached.conn = await cached.promise;
