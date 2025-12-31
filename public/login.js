@@ -52,8 +52,10 @@ formlog.addEventListener("submit", async (e) => {
 
 function showSuccess() {
   success.classList.remove("hidden");
+  error.classList.add("hidden");
 }
 
 function showError() {
   error.classList.remove("hidden");
+  success.classList.add("hidden");
 }
