@@ -2,12 +2,18 @@ import connectToDatabase from "./db.js";
 import User from "./models/User.js";
 
 export default async function handler(req, res) {
+  console.log(
+    "Mongo URI:",
+    "mongodb+srv://ushers_admin:Obiagaeli47%40@ushers-cluster.nz4l1zf.mongodb.net/ushers_records"
+  );
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
   try {
-    await connectToDatabase(process.env.MONGODB_URI);
+    await connectToDatabase(
+      "mongodb+srv://ushers_admin:Obiagaeli47%40@ushers-cluster.nz4l1zf.mongodb.net/ushers_records"
+    );
 
     const { username, password } = req.body;
 
