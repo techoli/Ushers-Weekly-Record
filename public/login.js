@@ -29,9 +29,9 @@ formlog.addEventListener("submit", async (e) => {
     if (result.success) {
       showSuccess();
       if (result.user.username === "pastor") {
-        window.location.href = "/public/pastor.html";
+        window.location.href = "/pastor.html";
       } else {
-        window.location.href = "/public/recorder.html";
+        window.location.href = "/recorder.html";
       }
       //   form.reset();
     } else {
