@@ -155,6 +155,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  function showSuccess() {
+    success.classList.remove("hidden");
+  }
+
   function calcTithe() {
     const total = parseMoney(cong_tithe.value) + parseMoney(min_tithe.value);
     total_tithe.value = formatMoneyValue(total);

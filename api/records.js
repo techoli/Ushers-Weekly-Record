@@ -1,46 +1,29 @@
-import mongoose from "mongoose";
-import Record from "./models/Record.js";
-
-const MONGODB_URI = process.env.MONGO_URI;
-
-if (!MONGODB_URI) {
-  throw new Error("Please define MONGO_URI in .env");
-}
-
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
-async function connectDB() {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => mongoose);
-  }
-
-  cached.conn = await cached.promise;
-  return cached.conn;
-}
+import connectToDatabase from "../db";
+import Record from "../models/Record";
 
 export default async function handler(req, res) {
-  try {
-    await connectDB();
+  await connectToDatabase(process.env.MONGODB_URI);
 
-    if (req.method === "POST") {
-      const record = await Record.create(req.body);
-      return res.status(201).json({ success: true, record });
-    }
-
-    if (req.method === "GET") {
+  if (req.method === "GET") {
+    // Get all records sorted by createdAt descending
+    try {
       const records = await Record.find().sort({ createdAt: -1 });
       return res.status(200).json(records);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ success: false, message: "Server error" });
     }
-
-    return res.status(405).json({ message: "Method Not Allowed" });
-  } catch (error) {
-    console.error("API Error:", error);
-    return res.status(500).json({ error: "Server error" });
+  } else if (req.method === "POST") {
+    // Save new record
+    try {
+      const record = new Record(req.body);
+      await record.save();
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ success: false, message: "Server error" });
+    }
+  } else {
+    return res.status(405).json({ message: "Method not allowed" });
   }
 }

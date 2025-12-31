@@ -1,13 +1,16 @@
+/* General body styling */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
+  padding: 10px;
 }
 
+/* Success message */
 .success {
   background-color: #e8f9f0;
   color: #1e8449;
@@ -17,39 +20,59 @@ body {
   margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Form container */
 .form-container {
   background-color: #fff;
   padding: 30px 40px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  width: 350px;
+  width: 100%;
+  max-width: 500px; /* desktop max */
   text-align: center;
+  margin: auto;
 }
 
+/* Logo */
 .form-logo {
   width: 80px;
-  margin-bottom: 10px;
+  max-width: 100%;
+  margin-bottom: 15px;
 }
 
+/* Headings */
 h2 {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   color: #333;
+  font-size: 24px;
 }
 
+h3 {
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 18px;
+}
+
+/* Inputs, selects, buttons */
 input,
 button,
 select {
   display: block;
   width: 100%;
-  margin: 10px 0;
-  padding: 10px;
+  margin: 8px 0;
+  padding: 12px;
   border-radius: 6px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
+/* Button styling */
 button {
   background-color: #3498db;
   color: #fff;
@@ -63,6 +86,7 @@ button:hover {
   background-color: #2980b9;
 }
 
+/* Loader */
 .loader {
   border: 5px solid #eee;
   border-top: 5px solid #3498db;
@@ -80,5 +104,64 @@ button:hover {
 @keyframes spin {
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* ===========================
+   Mobile responsiveness
+   =========================== */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .form-logo {
+    width: 60px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  input,
+  button,
+  select {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .loader {
+    width: 30px;
+    height: 30px;
+    border-width: 4px;
+  }
+}
+
+/* Tablet responsiveness */
+@media (min-width: 481px) and (max-width: 768px) {
+  .form-container {
+    width: 100%;
+    padding: 25px 30px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 17px;
+  }
+
+  input,
+  button,
+  select {
+    padding: 11px;
+    font-size: 15px;
   }
 }
