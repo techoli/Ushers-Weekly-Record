@@ -22,15 +22,15 @@ document.addEventListener("DOMContentLoaded", () => {
               <td>${new Date(r.sunday_date).toLocaleDateString()}</td>
               <td>${r.service_type || ""}</td>
               <td>${r.service_number || ""}</td>
-              <td>${r.l_offering || ""}</td>
-              <td>${r.t_offering || ""}</td>
+              <td>${formatMoneyValue(r.l_offering) || ""}</td>
+              <td>${formatMoneyValue(r.t_offering) || ""}</td>
               <td>${truncate(r.oc_offering) || ""}</td>
-              <td>${r.total_offering || ""}</td>
-              <td>${r.min_tithe || ""}</td>
-              <td>${r.cong_tithe || ""}</td>
+              <td>${formatMoneyValue(r.total_offering) || ""}</td>
+              <td>${formatMoneyValue(r.min_tithe) || ""}</td>
+              <td>${formatMoneyValue(r.cong_tithe) || ""}</td>
               <td>${truncate(r.oc_tithe) || ""}</td>
-              <td>${r.total_tithe || ""}</td>
-              <td>${r.total_money || ""}</td>
+              <td>${formatMoneyValue(r.total_tithe) || ""}</td>
+              <td>${formatMoneyValue(r.total_money) || ""}</td>
               <td>${r.men || ""}</td>
               <td>${r.women || ""}</td>
               <td>${r.children || ""}</td>
@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
             </tr>
           `;
 
-        dates.push(new Date(r.date).toLocaleDateString());
+        dates.push(new Date(r.sunday_date).toLocaleDateString());
         totals.push(r.total);
-        offerings.push(r.offering);
+        offerings.push(r.total_money);
       });
 
       drawAttendanceChart(dates, totals);
@@ -74,6 +74,13 @@ function drawAttendanceChart(labels, data) {
   });
 }
 
+function formatMoneyValue(num) {
+  return Number(num || 0).toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
 function drawOfferingChart(labels, data) {
   new Chart(document.getElementById("offeringChart"), {
     type: "line",
@@ -81,7 +88,7 @@ function drawOfferingChart(labels, data) {
       labels,
       datasets: [
         {
-          label: "Total Offering",
+          label: "Total Money",
           data,
           borderWidth: 3,
           tension: 0.3,
