@@ -1,5 +1,5 @@
 import connectToDatabase from "./db.js";
-import Record from "../models/Record.js";
+import Record from "./models/Record.js";
 
 export default async function handler(req, res) {
   await connectToDatabase(process.env.MONGODB_URI);
